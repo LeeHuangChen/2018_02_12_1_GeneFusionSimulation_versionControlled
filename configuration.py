@@ -10,6 +10,9 @@ numFusionEvents = [64, 128, 256, 512]
 totalEvolutionTimes = [1.5, 2, 2.5, 2.75, 3]
 numGenerations = [5]
 
+seqGenURL_Linux = "./Resources/Seq-Gen_linux/source/seq-gen"
+seqGenURL_Windows = "./Resources/Seq-Gen/source/seq-gen"
+
 # RandomFamilies Parameters
 famFolder = "RandomFamilies"
 

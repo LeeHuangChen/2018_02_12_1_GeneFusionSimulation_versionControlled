@@ -1,9 +1,5 @@
-import randomFamilies
-import fusedFamilies
-import processFusedGenes
-import blastpAndDataProc
+from src import randomFamilies, fusedFamilies, processFusedGenes, fileIO_Includes as fio, blastpAndDataProc
 import configuration as conf
-import fileIO_Includes as fio
 
 
 def main():

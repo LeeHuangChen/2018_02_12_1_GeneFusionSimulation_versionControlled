@@ -1,9 +1,7 @@
 import os
 import configuration as conf
 import subprocess
-from subprocess import call
-import sys
-import fileIO_Includes as fio
+from src import fileIO_Includes as fio
 
 infilename = "fam.csv"
 outfilename = "famh.csv"

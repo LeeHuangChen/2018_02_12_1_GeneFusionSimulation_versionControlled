@@ -110,14 +110,13 @@ def GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen
             generateTreeFlexible(treePath, [newSeq], seqLen, branchLen, numGenerations - rGen)
 
             if not len(newSeq) == seqLen:
-                sys.exit("FusedSequence has wrong length: length=" + len(newSeq))
+                sys.exit("FusedSequence has wrong length: length=" + str(len(newSeq)))
 
             # custom code for my linux/windows setup
-            seqGenURL = ""
             if sys.platform == "linux2":
-                seqGenURL = "./Seq-Gen_linux/source/seq-gen"
+                seqGenURL = conf.seqGenURL_Linux
             else:  # windows version
-                seqGenURL = "./Seq-Gen/source/seq-gen"
+                seqGenURL = conf.seqGenURL_Windows
 
             # seq-gen command
             cmd = [seqGenURL, model, "-l", str(seqLen), "-k", "1"]
@@ -134,17 +133,9 @@ def GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen
 
 
 def main(model, seqLen, numFamilies, numFusionEvents, TotalEvolutionTime, numGenerations):
-    # configuration pulled from the configuration file
-    # parameters
     name = fio.name(model, seqLen, numFamilies, numFusionEvents, TotalEvolutionTime, numGenerations)
     famPath = os.path.join(conf.generatedFolder, name, conf.famFolder)
-    # numFamilies=conf.numFamilies
-    # numGenerations=conf.numGenerations
-    # TotalEvolutionTime=conf.TotalEvolutionTime
-    # seqLen=conf.seqLen
-    # model=conf.model
 
-    # numFusionEvents=conf.numFusionEvents
     fusedPath = os.path.join(conf.generatedFolder, name, conf.fusedFolder)
     GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen, numFamilies, numGenerations,
                               TotalEvolutionTime)
