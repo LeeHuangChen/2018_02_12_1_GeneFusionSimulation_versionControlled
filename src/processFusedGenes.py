@@ -9,17 +9,18 @@ import random
 # either one or all of each protein from the the fusion families
 # this is toggled by the bool: includeAll
 # all of the proteins from the gene family, located in conf.famPath2
-def processFusedGenes(name, fusedPath, processedPath, famPath, includeAll):
-    # check for directory and generate the directory
-    fio.generateDirectories(processedPath)
-
+def processFusedGenes(name, fusedPath, famPath, includeAll):
     # adding the fused proteins into the fasta file
 
-    # obain all the filenames from fusedPath
+    # obtain all the file names from fusedPath
     filenames = os.listdir(fusedPath)
     fuseDict = fio.readFusionEventLog(os.path.join(fusedPath, "$FusionLog.txt"))
 
-    fio.createEmptyFiles([os.path.join(processedPath, name + ".fasta")])
+    # generate the sequence file
+    fio.generateDirectories(conf.sequenceFolder)
+    seqPath = os.path.join(conf.sequenceFolder, name+".fasta")
+    open(seqPath, "w")
+
     for filename in filenames:
         # checks for sequences files
         if "FuseFam" in filename:
@@ -27,20 +28,18 @@ def processFusedGenes(name, fusedPath, processedPath, famPath, includeAll):
 
             # read the sequences in the file
             seqs = fio.processSeqFile(os.path.join(fusedPath, filename))
-            if (includeAll == False):
+            if not includeAll:
                 # randomly picks one of the sequence from seq and delete the rest
                 seq = random.choice(seqs)
-                seqs = []
-                seqs.append(seq)
+                seqs = [seq]
 
             for i in range(len(seqs)):
                 proteinName = "ID_" + fuseDict[fuseID][0] + "_F1_" + fuseDict[fuseID][1] + "_F2_" + fuseDict[fuseID][
                     2] + "_G_" + fuseDict[fuseID][3] + "_SplitPt_" + fuseDict[fuseID][4] + "_GenID_" + str(i)
                 taxaName = "testTaxa"
 
-                filePath = os.path.join(processedPath, name + ".fasta")
                 content = fio.toFASTA(proteinName, taxaName, seqs[i])
-                fio.appendFile(filePath, content)
+                fio.appendFile(seqPath, content)
 
     # adding the proteins from the gene family into the fasta file
     folders = os.listdir(famPath)
@@ -51,18 +50,16 @@ def processFusedGenes(name, fusedPath, processedPath, famPath, includeAll):
         for i in range(len(seqs)):
             proteinName = folder + "_" + str(i)
             taxaName = "testTaxa"
-            filePath = os.path.join(processedPath, name + ".fasta")
             content = fio.toFASTA(proteinName, taxaName, seqs[i])
-            fio.appendFile(filePath, content)
+            fio.appendFile(seqPath, content)
 
 
 def main(name):
     fusedPath = os.path.join(conf.generatedFolder, name, conf.fusedFolder)
     # processedPath=os.path.join(conf.generatedFolder, name, conf.processedFolder)
-    processedPath = os.path.join(conf.resultFolder, conf.processedFolder)
     includeAll = conf.includeAll
     famPath = os.path.join(conf.generatedFolder, name, conf.famFolder)
-    processFusedGenes(name, fusedPath, processedPath, famPath, includeAll)
+    processFusedGenes(name, fusedPath, famPath, includeAll)
 
 
 if __name__ == "__main__":

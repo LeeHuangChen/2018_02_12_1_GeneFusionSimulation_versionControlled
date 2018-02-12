@@ -13,6 +13,15 @@ numGenerations = [5]
 seqGenURL_Linux = "./Resources/Seq-Gen_linux/source/seq-gen"
 seqGenURL_Windows = "./Resources/Seq-Gen/source/seq-gen"
 
+protLenFolder = "Results/ProtLen"
+allToAllFolder = "Results/allToall/"
+sequenceFolder = "Results/FastaSequences"
+blastDBFolder = "GeneratedFiles/BlastDataBase"
+
+# log folders
+logFolder = "GeneratedFiles/LogFiles"
+
+
 # RandomFamilies Parameters
 famFolder = "RandomFamilies"
 

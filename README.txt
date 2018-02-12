@@ -7,6 +7,8 @@ Running the program
 to have the program conduct blastp all-to-all, you must install the blast command line available at:
 	ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
+this also uses Biopython (http://biopython.org/)
+
 Before executing this program, check if there is a folder called "GeneratedFiles" in the folder.  The folder contains generated files from the previous execution and you can delete it
 To execute this program, open and check the configuration.py file.  This file contains all the configuration for the simulation.
 
