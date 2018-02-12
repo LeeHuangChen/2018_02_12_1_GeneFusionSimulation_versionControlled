@@ -59,7 +59,7 @@ def generateTreeFlexible(path, seqs, seqLen, branchL, numGen):
     f.close()
 
 
-def GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen, numFamilies, numGenerations,
+def GenerateFusedGeneFamilies(name, famPath, fusedPath, model, numFusionEvents, seqLen, numFamilies, numGenerations,
                               TotalEvolutionTime):
     # directories
     fusedGeneFamilies = fusedPath
@@ -72,10 +72,14 @@ def GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen
     # 	os.mkdir(fusedGeneFamilies)
 
     # make an empty log file
-    log = open(os.path.join(fusedGeneFamilies, "$FusionLog.txt"), "w")
-    log.write("#Fusion Events Log:\n")
-    log.write("#evnt, fam1, fam2, gen, spliceLoc\n")
-    log.close()
+    fio.generateDirectories(conf.fusionInfoFolder)
+    fusionLogPath = os.path.join(conf.fusionInfoFolder, name + "_fusionLog.txt")
+    oldLogPath = os.path.join(fusedGeneFamilies, "$FusionLog.txt")
+    for path in [fusionLogPath, oldLogPath]:
+        with open(path, "w") as f:
+            f.write("#Fusion Events Log:\n")
+            f.write("#evnt, fam1, fam2, gen, spliceLoc\n")
+
 
     # for each fusion event
     for i in range(numFusionEvents):
@@ -86,9 +90,10 @@ def GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen
         rSpliceLoc = random.randint(seqLen / 10, seqLen / 2)
 
         # log the reneration of the fused genes
-        with open(os.path.join(fusedGeneFamilies, "$FusionLog.txt"), "a") as log:
-            line = str(i) + "\t" + str(rFam1) + "\t" + str(rFam2) + "\t" + str(rGen) + "\t" + str(rSpliceLoc) + "\n"
-            log.write(line)
+        for path in [fusionLogPath, oldLogPath]:
+            with open(path, "a") as log:
+                line = str(i) + "\t" + str(rFam1) + "\t" + str(rFam2) + "\t" + str(rGen) + "\t" + str(rSpliceLoc) + "\n"
+                log.write(line)
 
         # Find the two sequence families to combine
         family1 = FindSequencesByGeneration(famPath, rFam1, rGen)
@@ -137,7 +142,7 @@ def main(model, seqLen, numFamilies, numFusionEvents, TotalEvolutionTime, numGen
     famPath = os.path.join(conf.generatedFolder, name, conf.famFolder)
 
     fusedPath = os.path.join(conf.generatedFolder, name, conf.fusedFolder)
-    GenerateFusedGeneFamilies(famPath, fusedPath, model, numFusionEvents, seqLen, numFamilies, numGenerations,
+    GenerateFusedGeneFamilies(name, famPath, fusedPath, model, numFusionEvents, seqLen, numFamilies, numGenerations,
                               TotalEvolutionTime)
 
 

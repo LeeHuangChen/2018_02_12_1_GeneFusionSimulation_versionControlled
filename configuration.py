@@ -13,7 +13,9 @@ numGenerations = [5]
 seqGenURL_Linux = "./Resources/Seq-Gen_linux/source/seq-gen"
 seqGenURL_Windows = "./Resources/Seq-Gen/source/seq-gen"
 
+# Main Result Folders
 protLenFolder = "Results/ProtLen"
+fusionInfoFolder = "Results/FusionInfo"
 allToAllFolder = "Results/allToall/"
 sequenceFolder = "Results/FastaSequences"
 blastDBFolder = "GeneratedFiles/BlastDataBase"
