@@ -22,7 +22,8 @@ blastDBFolder = "GeneratedFiles/BlastDataBase"
 
 # log folders
 logFolder = "GeneratedFiles/LogFiles"
-
+outputLogFolder = "Results"
+outputLogFile = "Results/log_output.txt"
 
 # RandomFamilies Parameters
 famFolder = "RandomFamilies"
@@ -46,3 +47,4 @@ add = "_proc"
 blastpOutfilename_processed = blastpOutfilename.replace(".csv", add + ".csv")
 resultFolder = "Results/allToall/"
 processedResultFolder = "Results/allToall_mosaicFinder/"
+

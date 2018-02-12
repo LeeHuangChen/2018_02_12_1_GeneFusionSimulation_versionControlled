@@ -1,4 +1,12 @@
 import os
+import configuration as conf
+
+
+def printL(string):
+    generateDirectories(conf.outputLogFolder)
+    print string
+    with open(conf.outputLogFile, "a") as f:
+        f.write(string+"\n")
 
 
 # A list of includes for file io
