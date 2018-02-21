@@ -5,9 +5,12 @@ generatedFolder = "GeneratedFiles"
 # parameters
 models = ["-mjtt"]
 seqLens = [500]
-numFamilies = [20]
-numFusionEvents = [64, 128, 256, 512]
-totalEvolutionTimes = [1.5, 2, 2.5, 2.75, 3]
+#numFamilies = [20]
+#numFusionEvents = [64, 128, 256, 512]
+#totalEvolutionTimes = [1.5, 2, 2.5, 2.75, 3]
+numFamilies = [2, 4, 8, 16]
+numFusionEvents = [4, 8, 16, 32, 64]
+totalEvolutionTimes = [1.5]
 numGenerations = [5]
 
 seqGenURL_Linux = "./Resources/Seq-Gen_linux/source/seq-gen"
