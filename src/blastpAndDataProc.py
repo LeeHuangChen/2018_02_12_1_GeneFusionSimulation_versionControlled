@@ -36,10 +36,10 @@ def generateReorderedFileFromBlastResults(infilepath, outfilepath):
     for line in lines:
         if (len(line) > 0):
             arr = line.split("\t")
-            # newline="Gi|"+arr[0].split("F")[0]+"|"+"\t"+"Gi|"+arr[1].split("F")[0]+"|"+"\t"+arr[10]+"\t"+arr[2]+"\t"+arr[3]+"\t"+arr[5]+"\t"+arr[8]+"\t"+arr[9]+"\t"+arr[6]+"\t"+arr[7]+"\n"
-            newline = arr[0] + "\t" + arr[1] + "\t" + arr[10] + "\t" + arr[2] + "\t" + arr[3] + "\t" + arr[5] + "\t" + \
-                      arr[8] + "\t" + arr[9] + "\t" + arr[6] + "\t" + arr[7] + "\n"
-            outfile.write(newline)
+            if arr[0] != arr[1]:
+                newline = arr[0] + "\t" + arr[1] + "\t" + arr[10] + "\t" + arr[2] + "\t" + arr[3] + "\t" + arr[5] + "\t" + \
+                          arr[8] + "\t" + arr[9] + "\t" + arr[6] + "\t" + arr[7] + "\n"
+                outfile.write(newline)
     outfile.close()
 
 

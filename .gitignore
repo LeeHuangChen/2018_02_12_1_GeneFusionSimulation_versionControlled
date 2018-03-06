@@ -4,3 +4,4 @@ venv
 Results
 GeneratedFiles
 *.pyc
+configuration.py
